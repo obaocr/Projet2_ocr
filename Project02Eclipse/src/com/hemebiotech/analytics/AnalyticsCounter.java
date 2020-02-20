@@ -4,10 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-
+/**
+ * Application to read a file of symptons (string) and count occurences by
+ * symptoms; return a file with number of occurence by symptoms if empty file
+ * return the comment "Input file is empty"
+ */
 public class AnalyticsCounter {
 
-
+	/**
+	 * Main function : call the ReadSymptomDataFromFile.GetSymptoms class.method to
+	 * read the file and obtain a list Call the countBySymptom function to get the
+	 * map of occurence of symptoms Call the WriteSymptomRresult.WriteResult
+	 * class.method to write the file
+	 *
+	 */
 	public static void main(String args[]) {
 
 		Map<String, Integer> myMapp = new HashMap<>();
@@ -32,7 +42,7 @@ public class AnalyticsCounter {
 	 * countBySymptom function to get the map of occurence of symptoms
 	 * 
 	 */
-	// Lecture du fichier en entr�e et compter les occurences par symptome
+	// Lecture du fichier en entrée et compter les occurences par symptome
 	private static Map<String, Integer> countBySymptom(List<String> listSymptom) {
 		Map<String, Integer> myMapp = new HashMap<>();
 		for (String symptom : listSymptom) {
