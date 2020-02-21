@@ -1,8 +1,11 @@
 package com.hemebiotech.analytics;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * Application to read a file of symptons (string) and count occurences by
@@ -20,7 +23,7 @@ public class AnalyticsCounter {
 	 */
 	public static void main(String args[]) {
 
-		Map<String, Integer> myMapp = new HashMap<>();
+		List<String> myList = new ArrayList<>();
 		String pathFileInput = manageInputFilePath(args);
 		String pathFileOutput = manageOuputFilePath(args);
 		
@@ -30,11 +33,11 @@ public class AnalyticsCounter {
 
 		// Count occurence of symptom
 		if (lResult.size() > 0) {
-			myMapp = countBySymptom(lResult);
+			myList = countBySymptom(lResult);
 		}
 
 		// Write the rsult file
-		ISymptomWriter writer = new WriteSymptomRresult(pathFileOutput, myMapp);
+		ISymptomWriter writer = new WriteSymptomRresult(pathFileOutput, myList);
 		writer.WriteResult();
 	}
 	
@@ -62,12 +65,13 @@ public class AnalyticsCounter {
 		}
 	}
 	/**
-	 * countBySymptom function to get the map of occurence of symptoms
+	 * countBySymptom function to get the List sorted (alphabetic) of occurence of symptoms
 	 * 
 	 */
 	// Read the list and count occurence, return a map
-	private static Map<String, Integer> countBySymptom(List<String> listSymptom) {
+	private static List<String> countBySymptom(List<String> listSymptom) {
 		Map<String, Integer> myMapp = new HashMap<>();
+		List<String> lResultAgg = new ArrayList<>();
 		for (String symptom : listSymptom) {
 			if (!symptom.isEmpty()) {
 				if (myMapp.get(symptom) != null) {
@@ -77,6 +81,13 @@ public class AnalyticsCounter {
 				}
 			}
 		}
-		return myMapp;
+		
+		if (myMapp.size() > 0) {
+			for (Map.Entry mapentry : myMapp.entrySet()) {
+				lResultAgg.add(mapentry.getKey() + ": " + mapentry.getValue());
+			}
+			Collections.sort(lResultAgg);
+		}
+		return lResultAgg;
 	}
 }
