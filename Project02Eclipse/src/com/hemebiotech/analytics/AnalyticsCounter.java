@@ -16,33 +16,56 @@ public class AnalyticsCounter {
 	 * read the file and obtain a list Call the countBySymptom function to get the
 	 * map of occurence of symptoms Call the WriteSymptomRresult.WriteResult
 	 * class.method to write the file
-	 *
+	 * @param optional two parameters for the main in argument : input and output file name with full path 
 	 */
 	public static void main(String args[]) {
 
 		Map<String, Integer> myMapp = new HashMap<>();
-		String pathFileInput = "C:/openclassrooms/projet2/symptoms.txt";
-		String pathFileOutput = "C:/openclassrooms/projet2/result.out";
-
-		// Lecture fichier et retour dans une liste
+		String pathFileInput = manageInputFilePath(args);
+		String pathFileOutput = manageOuputFilePath(args);
+		
+		// Read the file 
 		ISymptomReader reader = new ReadSymptomDataFromFile(pathFileInput);
 		List<String> lResult = reader.GetSymptoms();
 
-		// Si fichier non vide, compter les occurences symptomes
+		// Count occurence of symptom
 		if (lResult.size() > 0) {
 			myMapp = countBySymptom(lResult);
 		}
 
-		// Ecriture fichier résultat depuis une Map (vide ou non vide)
+		// Write the rsult file
 		ISymptomWriter writer = new WriteSymptomRresult(pathFileOutput, myMapp);
 		writer.WriteResult();
 	}
-
+	
+	
+	/**
+	 * @param args from the main
+	 * @return : full path name for input file
+	 */
+	private static String manageInputFilePath(String[] files) {
+		if(files.length == 2 && !files[0].isEmpty()) {
+			return files[0];
+		} else {	
+			return "C:/openclassrooms/projet2/symptoms.txt";
+		}
+	}
+	/**
+	 * @param args from the main
+	 * @return : full path name for output file 
+	 */
+	private static String manageOuputFilePath(String[] files) {
+		if(files.length == 2 && !files[1].isEmpty()) {
+			return files[1];
+		} else {	
+			return "C:/openclassrooms/projet2/result.out";
+		}
+	}
 	/**
 	 * countBySymptom function to get the map of occurence of symptoms
 	 * 
 	 */
-	// Lecture du fichier en entrée et compter les occurences par symptome
+	// Read the list and count occurence, return a map
 	private static Map<String, Integer> countBySymptom(List<String> listSymptom) {
 		Map<String, Integer> myMapp = new HashMap<>();
 		for (String symptom : listSymptom) {

@@ -4,6 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * class that implements ISymptomWriter Interface
+ * the method "WriteSymptomRresult" read the Map of symptoms and occurrence and write the result file 
+ */
 public class WriteSymptomRresult implements ISymptomWriter {
 
 	private String filepath;
@@ -17,8 +21,7 @@ public class WriteSymptomRresult implements ISymptomWriter {
 
 	@Override
 	public void WriteResult() {
-		try {
-			FileWriter writer = new FileWriter(filepath);
+		try (FileWriter writer = new FileWriter(filepath)){
 			if (symptomMapp.size() == 0) {
 				writer.write("Input file is empty" + "\n");
 			} else {
@@ -26,7 +29,6 @@ public class WriteSymptomRresult implements ISymptomWriter {
 					writer.write(mapentry.getKey() + ": " + mapentry.getValue() + "\n");
 				}
 			}
-			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
