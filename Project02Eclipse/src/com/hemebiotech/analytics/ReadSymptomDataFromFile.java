@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * class that implements ISymptomReader Interface
- * the method "GetSymptoms" read the file and returns a list of symptoms 
+ * class that implements ISymptomReader Interface the method "GetSymptoms" read
+ * the file and returns a list of symptoms
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	private String filepath;
-
 
 	public ReadSymptomDataFromFile(String filepath) {
 		this.filepath = filepath;
@@ -24,7 +23,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		List<String> result = new ArrayList<>();
 
 		if (filepath != null) {
-			try (BufferedReader reader = new BufferedReader(new FileReader(filepath))){
+			try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
 				String line = reader.readLine();
 				while (line != null) {
 					result.add(line);
