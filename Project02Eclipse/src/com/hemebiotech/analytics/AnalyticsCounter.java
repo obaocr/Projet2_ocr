@@ -19,7 +19,7 @@ public class AnalyticsCounter {
 	 * map of occurence of symptoms Call the WriteSymptomRresult.WriteResult
 	 * class.method to write the file
 	 * 
-	 * @param optional two parameters for the main in argument : input and output
+	 * @param args optional two parameters for the main in argument : input and output
 	 *                 file name with full path
 	 */
 	public static void main(String args[]) {
