@@ -2,31 +2,32 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 /**
  * class that implements ISymptomWriter Interface the method
  * "WriteSymptomRresult" read the Map of symptoms and occurrence and write the
  * result file
  */
-public class WriteSymptomRresult implements ISymptomWriter {
+public class WriteSymptomResult implements ISymptomWriter {
 
 	private String filepath;
-	private List<String> symptomList;
+	private Map<String, Integer> symptomMap;
 
-	public WriteSymptomRresult(String filepath, List<String> resultList) {
+	public WriteSymptomResult(String filepath, Map<String, Integer> resultMap) {
 		this.filepath = filepath;
-		this.symptomList = resultList;
+		this.symptomMap = resultMap;
 	}
 
 	@Override
 	public void WriteResult() {
 		try (FileWriter writer = new FileWriter(filepath)) {
-			if (symptomList.size() == 0) {
+			if (symptomMap.size() == 0) {
 				writer.write("Input file is empty" + "\n");
 			} else {
-				for (String sLine : symptomList) {
-					writer.write(sLine + "\n");
+
+				for (Map.Entry mapentry : symptomMap.entrySet()) {
+					writer.write(mapentry.getKey() + ": " + mapentry.getValue() + "\n");
 				}
 			}
 		} catch (IOException e) {

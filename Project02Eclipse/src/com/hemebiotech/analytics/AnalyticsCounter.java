@@ -1,8 +1,8 @@
 package com.hemebiotech.analytics;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -24,21 +24,24 @@ public class AnalyticsCounter {
 	 */
 	public static void main(String args[]) {
 
-		List<String> myList = new ArrayList<>();
+		AnalyticsCounter analyticsCounter = new AnalyticsCounter();
+
+		Map<String, Integer> myMap = new TreeMap<>();
+		;
 		String pathFileInput = manageInputFilePath(args);
 		String pathFileOutput = manageOuputFilePath(args);
 
 		// Read the file
 		ISymptomReader reader = new ReadSymptomDataFromFile(pathFileInput);
-		List<String> lResult = reader.GetSymptoms();
+		List<String> lResult = reader.getSymptoms();
 
 		// Count occurence of symptom
 		if (lResult.size() > 0) {
-			myList = countBySymptom(lResult);
+			myMap = analyticsCounter.countBySymptom(lResult);
 		}
 
-		// Write the rsult file
-		ISymptomWriter writer = new WriteSymptomRresult(pathFileOutput, myList);
+		// Write the result file
+		ISymptomWriter writer = new WriteSymptomResult(pathFileOutput, myMap);
 		writer.WriteResult();
 	}
 
@@ -67,30 +70,17 @@ public class AnalyticsCounter {
 	}
 
 	/**
-	 * countBySymptom function to get the List sorted (alphabetic) of occurence of
+	 * countBySymptom function to get the Map sorted (alphabetic) of occurence of
 	 * symptoms
 	 * 
 	 */
 	// Read the list and count occurence, return a map
-	private static List<String> countBySymptom(List<String> listSymptom) {
-		Map<String, Integer> myMapp = new HashMap<>();
+	private Map<String, Integer> countBySymptom(List<String> listSymptom) {
+		Map<String, Integer> myMapp = new TreeMap<>();
 		List<String> lResultAgg = new ArrayList<>();
 		for (String symptom : listSymptom) {
-			if (!symptom.isEmpty()) {
-				if (myMapp.get(symptom) != null) {
-					myMapp.put(symptom, myMapp.get(symptom) + 1);
-				} else {
-					myMapp.put(symptom, 1);
-				}
-			}
+			myMapp.put(symptom, myMapp.getOrDefault(symptom,0) + 1);
 		}
-
-		if (myMapp.size() > 0) {
-			for (Map.Entry mapentry : myMapp.entrySet()) {
-				lResultAgg.add(mapentry.getKey() + ": " + mapentry.getValue());
-			}
-			Collections.sort(lResultAgg);
-		}
-		return lResultAgg;
+		return myMapp;
 	}
 }
