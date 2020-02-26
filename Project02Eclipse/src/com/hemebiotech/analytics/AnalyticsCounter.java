@@ -72,12 +72,12 @@ public class AnalyticsCounter {
 	/**
 	 * countBySymptom function to get the Map sorted (alphabetic) of occurence of
 	 * symptoms
-	 * 
+	 * @param listSymptom : The list of symptoms
+	 * @return  : the Map of result 
 	 */
 	// Read the list and count occurence, return a map
 	private Map<String, Integer> countBySymptom(List<String> listSymptom) {
 		Map<String, Integer> myMapp = new TreeMap<>();
-		List<String> lResultAgg = new ArrayList<>();
 		for (String symptom : listSymptom) {
 			myMapp.put(symptom, myMapp.getOrDefault(symptom,0) + 1);
 		}
