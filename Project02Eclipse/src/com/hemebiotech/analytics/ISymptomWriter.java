@@ -10,6 +10,6 @@ public interface ISymptomWriter {
 	 * 
 	 * @return nothing
 	 */
-	void WriteResult();
+	void writeResult();
 
 }

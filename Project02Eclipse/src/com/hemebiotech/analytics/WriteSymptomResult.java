@@ -20,7 +20,7 @@ public class WriteSymptomResult implements ISymptomWriter {
 	}
 
 	@Override
-	public void WriteResult() {
+	public void writeResult() {
 		try (FileWriter writer = new FileWriter(filepath)) {
 			if (symptomMap.size() == 0) {
 				writer.write("Input file is empty" + "\n");

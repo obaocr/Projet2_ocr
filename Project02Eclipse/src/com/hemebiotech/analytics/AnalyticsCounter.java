@@ -42,7 +42,7 @@ public class AnalyticsCounter {
 
 		// Write the result file
 		ISymptomWriter writer = new WriteSymptomResult(pathFileOutput, myMap);
-		writer.WriteResult();
+		writer.writeResult();
 	}
 
 	/**
