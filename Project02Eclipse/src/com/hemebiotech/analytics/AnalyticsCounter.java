@@ -1,10 +1,8 @@
 package com.hemebiotech.analytics;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Application to read a file of symptons (string) and count occurences by
@@ -41,7 +39,7 @@ public class AnalyticsCounter {
 		}
 
 		// Write the result file
-		ISymptomWriter writer = new WriteSymptomResult(pathFileOutput, myMap);
+		ISymptomWriter writer = new WriteSymptomResultToFile(pathFileOutput, myMap);
 		writer.writeResult();
 	}
 

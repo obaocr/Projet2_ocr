@@ -9,12 +9,12 @@ import java.util.Map;
  * "WriteSymptomRresult" read the Map of symptoms and occurrence and write the
  * result file
  */
-public class WriteSymptomResult implements ISymptomWriter {
+public class WriteSymptomResultToFile implements ISymptomWriter {
 
 	private String filepath;
 	private Map<String, Integer> symptomMap;
 
-	public WriteSymptomResult(String filepath, Map<String, Integer> resultMap) {
+	public WriteSymptomResultToFile(String filepath, Map<String, Integer> resultMap) {
 		this.filepath = filepath;
 		this.symptomMap = resultMap;
 	}
